@@ -1,0 +1,9 @@
+INSERT INTO USERS(display_name,city,county,post_code,peanut_allergy,egg_allergy,dairy_allergy) VALUES ('Tiny Rodgers','London','Westminster','LE2',true,false,false);
+INSERT INTO USERS(display_name,city,county,post_code,peanut_allergy,egg_allergy,dairy_allergy) VALUES ('BigJohn','Burnley','Lancashire','BS8',false,true,false);
+INSERT INTO USERS(display_name,city,county,post_code,peanut_allergy,egg_allergy,dairy_allergy) VALUES ('Half_Pipe','Manchester','Lancashire','M11',false,false,false);
+INSERT INTO RESTAURANT(name, address, postcode, tel_number, email, website, overall_score, peanut_score, egg_score, dairy_score, peanut_reviews, dairy_reviews, egg_reviews, total_reviews) VALUES ('Daves Bistro', '2 This Street', 'BB11', '123456', 'dave@dave', 'dave.com', 5, 5, 5, 5, 1, 1, 1,4);
+INSERT INTO RESTAURANT(name, address, postcode, tel_number, email, website, overall_score, peanut_score, egg_score, dairy_score, peanut_reviews, dairy_reviews, egg_reviews, total_reviews) VALUES ('Johns Bistro', '7 That Street', 'BB11', '123456', 'dave@dave', 'dave.com', 4, 4, 4, 4, 3, 4, 3,7);
+INSERT INTO RESTAURANT(name, address, postcode, tel_number, email, website, overall_score, peanut_score, egg_score, dairy_score, peanut_reviews, dairy_reviews, egg_reviews, total_reviews) VALUES ('Harrys Bistro', '2 Regent Street', 'BB11', '123456', 'dave@dave', 'dave.com', 6, 6, 6, 6, 3, 4, 3,7);
+INSERT INTO DINING_REVIEW(submission_name, restaurant_id, peanut_score, dairy_score, egg_score, comments, review_status) VALUES ('BigJock', 1, 2, 5, 3, 'Proper good', 2);
+INSERT INTO DINING_REVIEW(submission_name, restaurant_id, peanut_score, dairy_score, egg_score, comments, review_status) VALUES ('BigJock', 1, 3, 2, 1, 'Proper good', 2);
+INSERT INTO DINING_REVIEW(submission_name, restaurant_id, peanut_score, dairy_score, egg_score, comments, review_status) VALUES ('BigJock', 1, 4, 4, 4, 'Proper good', 2);

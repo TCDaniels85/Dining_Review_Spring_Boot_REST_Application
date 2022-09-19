@@ -1,0 +1,66 @@
+##Test Notes##
+All tests below performed using the curl command in the terminal window, all tests successful.
+
+
+##Get all users##
+curl localhost:8000/USERS
+
+##Get user by display name##
+curl localhost:8000/USERS/BigJohn
+
+##Amending user details##
+curl -X PUT localhost:8000/USERS/BigJohn -H "Content-Type: application/json" -d "{\"city\":\"Halifax\", \"postcode\": \"HX12\"}"
+##Test for display name error when ammending##
+curl -X PUT localhost:8000/USERS/BigJ -H "Content-Type: application/json" -d "{\"city\":\"Halifax\", \"postcode\": \"HX12\"}"
+
+##Add a user curl##
+curl -X POST localhost:8000/USERS -H "Content-Type: application/json" -d "{\"displayName\":\"Big_Jules\",\"city\":\"Todmorden\", \"county\": \"Yorkshire\", \"postcode\": \"BB11\", \"isInterestedPeanut\": false, \"isInterestedEgg\": false, \"isInterestedDairy\": false}"
+##Test adding user with same name as existing user##
+curl -X POST localhost:8000/USERS -H "Content-Type: application/json" -d "{\"displayName\":\"Tiny Rodgers\",\"city\":\"Todmorden\", \"county\": \"Yorkshire\", \"postcode\": \"BB11\", \"isInterestedPeanut\": false, \"isInterestedEgg\": false, \"isInterestedDairy\": false}"
+##Test adding user with blank display name##
+curl -X POST localhost:8000/USERS -H "Content-Type: application/json" -d "{\"displayName\":\"  \",\"city\":\"Todmorden\", \"county\": \"Yorkshire\", \"postcode\": \"BB11\", \"isInterestedPeanut\": false, \"isInterestedEgg\": false, \"isInterestedDairy\": false}"
+
+
+##view restaurants##
+curl localhost:8000/RESTAURANT/2
+
+##view restaurant by id##
+curl localhost:8000/RESTAURANT/2
+
+##Add Restaurant, tested duplicate restaurant validation by adding record again##
+curl -X POST localhost:8000/RESTAURANT -H "Content-Type: application/json" -d "{\"name\":\"Steves cafe\",\"address\":\"6 That Street\",\"postcode\":\"OL13\",\"telNumber\":\"0123646\",\"email\":\"steves@steves.com\", \"website\":\"steves.co.uk\"}"
+##Test different postcodes can be used with same restaurant name and visa versa##
+curl -X POST localhost:8000/RESTAURANT -H "Content-Type: application/json" -d "{\"name\":\"Nice Cafe\",\"address\":\"8 That Street\",\"postcode\":\"OL13\",\"telNumber\":\"0123646\",\"email\":\"steves@steves.com\", \"website\":\"steves.co.uk\"}"
+curl -X POST localhost:8000/RESTAURANT -H "Content-Type: application/json" -d "{\"name\":\"Steves cafe\",\"address\":\"6 That Street\",\"postcode\":\"BB12\",\"telNumber\":\"0164678\",\"email\":\"steves@steves.com\", \"website\":\"steves.co.uk\"}"
+
+
+
+##Restaurant search using poastcode and allergy, tested after adding more restaurants##
+curl "localhost:8000/RESTAURANT/SEARCH?postcode=BB11&allergy=peanut"
+curl "localhost:8000/RESTAURANT/SEARCH?postcode=BB11&allergy=egg"
+curl "localhost:8000/RESTAURANT/SEARCH?postcode=BB11&allergy=dairy"
+
+##add review##
+curl -X POST localhost:8000/DININGREVIEW -H "Content-Type: application/json" -d "{\"submissionName\":\"BigJohn\",\"restaurantId\":2,\"peanutScore\":2,\"eggScore\":2,\"dairyScore\":2,\"comments\":\"Very good\"}"
+##Add review, testing score validation##
+curl -X POST localhost:8000/DININGREVIEW -H "Content-Type: application/json" -d "{\"submissionName\":\"BigJohn\",\"restaurantId\":2,\"peanutScore\":2,\"eggScore\":2,\"dairyScore\":2,\"comments\":\"Very good\"}"
+##Add review testing name validation##
+curl -X POST localhost:8000/DININGREVIEW -H "Content-Type: application/json" -d "{\"submissionName\":\"hi\",\"restaurantId\":2,\"peanutScore\":2,\"eggScore\":2,\"dairyScore\":2,\"comments\":\"Very good\"}"
+## Add review testing restaurant id validation##
+curl -X POST localhost:8000/DININGREVIEW -H "Content-Type: application/json" -d "{\"submissionName\":\"BigJohn\",\"restaurantId\":9,\"peanutScore\":2,\"eggScore\":2,\"dairyScore\":2,\"comments\":\"Very good\"}"
+##Add review testing all scores blank validation##
+curl -X POST localhost:8000/DININGREVIEW -H "Content-Type: application/json" -d "{\"submissionName\":\"BigJohn\",\"restaurantId\":9,\"comments\":\"Very good\"}"
+
+##see pending reviews ##
+curl localhost:8000/DININGREVIEW/PENDING
+
+##amend review to update status##
+curl -X PUT localhost:8000/DININGREVIEW/1 -H "Content-Type: application/json" -d "{\"reviewStatus\": \"ACCEPTED\"}"
+curl -X PUT localhost:8000/DININGREVIEW/1 -H "Content-Type: application/json" -d "{\"reviewStatus\": \"REJECTED\"}"
+
+##Notes##
+-When pre populating database, don't include an id field, this negates the autoincrement
+notation set up by GenerateValue
+
+
+
